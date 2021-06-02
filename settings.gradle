@@ -1,0 +1,2 @@
+rootProject.name = "Shiny Disco"
+include ':app'
