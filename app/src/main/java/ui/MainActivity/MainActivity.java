@@ -1,4 +1,4 @@
-package com.example.shinydisco.MainActivity;
+package ui.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
