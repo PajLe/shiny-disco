@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "940048032534",
+    "project_id": "shiny-disco",
+    "storage_bucket": "shiny-disco.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940048032534:android:0f25a9692f5a23f41de637",
+        "android_client_info": {
+          "package_name": "com.example.shinydisco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940048032534-bsb0uqdjoptimrhepouecfd987v5s0ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAjQXYvmYkpQJWXK5eE3WwoZJCSx13cME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940048032534-bsb0uqdjoptimrhepouecfd987v5s0ch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
