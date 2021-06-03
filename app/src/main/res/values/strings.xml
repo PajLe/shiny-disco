@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Shiny Disco</string>
+    <string name="fulllogo_bkg_description">Logo of the application with its name</string>
+    <string name="register_image_button_description">Profile image to be uploaded with registration</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+
 </resources>

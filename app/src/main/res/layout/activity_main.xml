@@ -5,4 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_app_color"
-    tools:context="ui.MainActivity.MainActivity"/>
+    tools:context="ui.MainActivity.MainActivity">
+
+    <ImageView
+        android:id="@+id/fulllogo_mainscreen"
+        android:layout_width="207dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/fulllogo_bkg_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logofull_bkg" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/auth_tabs"
+        android:layout_width="301dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="27dp"
+        android:background="@color/main_app_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fulllogo_mainscreen"
+        app:tabIconTint="@color/shiny_disco_purple"
+        app:tabIndicatorColor="@color/shiny_disco_pink"
+        app:tabSelectedTextColor="@color/shiny_disco_pink"
+        app:tabTextColor="#FFFFFF">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/sign_in_tab_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/sign_up_tab_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/auth_elements_pager"
+        android:layout_width="389dp"
+        android:layout_height="441dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auth_tabs"
+        app:layout_constraintVertical_bias="0.36" />
+</androidx.constraintlayout.widget.ConstraintLayout>
