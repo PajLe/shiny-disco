@@ -10,6 +10,7 @@
     <color name="main_app_color">#2E2F33</color>
     <color name="shiny_disco_pink">#C032A4</color>
     <color name="shiny_disco_purple">#866FD4</color>
+    <color name="shiny_disco_purple_transparent">#66866FD4</color>
     <color name="shiny_disco_light_cyan">#A3F3FF</color>
     <color name="shiny_disco_cyan">#34BCDB</color>
     <color name="shiny_disco_dark_cyan">#3CB1FD</color>

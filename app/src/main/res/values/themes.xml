@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/shiny_disco_cyan</item>
         <item name="colorSecondaryVariant">@color/shiny_disco_dark_cyan</item>
-        <item name="colorOnSecondary">@color/main_app_color</item>
+        <item name="colorOnSecondary">#E0E0E0</item>
         <!-- Status bar color. -->
         <item name="android:windowTranslucentStatus" tools:targetApi="l">true</item>
         <!-- Customize your theme here. -->
