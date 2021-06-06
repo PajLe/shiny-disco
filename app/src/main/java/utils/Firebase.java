@@ -7,7 +7,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class Firebase {
     // realtime db
-    public static final String USERS = "users"; // "tables"
+    public static final String DB_USERS = "users"; // "tables"
 
     private static DatabaseReference dbRef = FirebaseDatabase.getInstance("https://shiny-disco-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
@@ -16,6 +16,8 @@ public class Firebase {
     }
 
     // storage
+    public static final String STORAGE_USER_PHOTOS = "users/photos";
+
     private static StorageReference storageRef = FirebaseStorage.getInstance("gs://shiny-disco.appspot.com").getReference();
 
     public static StorageReference getStorageRef() {
