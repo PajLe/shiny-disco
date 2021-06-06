@@ -134,8 +134,7 @@ public class SignUpFragment extends Fragment {
                         Object d = extras.get("data");
                         if (d != null) {
                             Bitmap img = (Bitmap)d;
-                            if (img != null)
-                                imageButton.setImageBitmap(img);
+                            imageButton.setImageBitmap(img);
                         }
                     }
                 }
