@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context="ui.HomeActivity.HomeActivity">
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Home act"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="298dp" />
+        android:text="Home activity sign out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
