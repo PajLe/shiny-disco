@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_app_color">#2E2F33</color>
+    <color name="main_app_color_light">#575860</color>
     <color name="shiny_disco_pink">#C032A4</color>
     <color name="shiny_disco_purple">#866FD4</color>
     <color name="shiny_disco_purple_transparent">#66866FD4</color>

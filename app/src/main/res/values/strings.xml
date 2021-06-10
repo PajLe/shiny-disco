@@ -8,5 +8,9 @@
     <string name="password">Password</string>
     <string name="name">Name</string>
     <string name="email">E-mail</string>
+    <string name="openNavBar">Navigation bar open</string>
+    <string name="closeNavBar">Navigation bar close</string>
+    <string name="app">App</string>
+    <string name="sign_out">Sign out</string>
 
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <item android:title="STORAGAE">-->
+<!--        <menu>-->
+<!--            <item android:title="my_files"-->
+<!--                android:icon="@drawable/ic_baseline_folder_24" />-->
+<!--            <item android:title="shared"-->
+<!--                android:icon="@drawable/ic_baseline_people_24" />-->
+<!--            <item android:title="Starred"-->
+<!--                android:icon="@drawable/ic_baseline_star_24" />-->
+<!--            <item android:title="Recent"-->
+<!--                android:icon="@drawable/ic_baseline_access_time_24" />-->
+<!--            <item android:title="Backup"-->
+<!--                android:icon="@drawable/ic_baseline_backup_24" />-->
+<!--        </menu>-->
+<!--    </item>-->
+
+    <item android:title="@string/app"
+        >
+        <menu>
+            <item android:id="@+id/sign_out_menu_item"
+                android:title="@string/sign_out"
+                android:icon="@drawable/outline_logout_24"
+                app:iconTint="@color/shiny_disco_light_cyan"
+                />
+        </menu>
+    </item>
+
+</menu>
