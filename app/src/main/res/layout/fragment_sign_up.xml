@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="448dp">
 
         <Button
             android:id="@+id/register_button"
@@ -25,10 +25,10 @@
 
         <EditText
             android:id="@+id/register_username_input"
-            android:autofillHints="username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:autofillHints="username"
             android:ems="10"
             android:hint="@string/username"
             android:inputType="textPersonName"
@@ -43,10 +43,10 @@
 
         <EditText
             android:id="@+id/register_name_input"
-            android:autofillHints="name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:autofillHints="name"
             android:ems="10"
             android:hint="@string/name"
             android:inputType="textPersonName"
@@ -61,10 +61,10 @@
 
         <EditText
             android:id="@+id/register_email_input"
-            android:autofillHints="email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:autofillHints="email"
             android:ems="10"
             android:hint="@string/email"
             android:inputType="textWebEmailAddress"
@@ -90,10 +90,10 @@
 
         <EditText
             android:id="@+id/register_password_input"
-            android:autofillHints="password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:autofillHints="password"
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
