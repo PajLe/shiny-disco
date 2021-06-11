@@ -126,7 +126,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressLint("MissingPermission")
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 1: {
@@ -134,7 +134,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     Fragment f = fragmentManager.findFragmentById(R.id.home_fragment_container);
 
                     if (f instanceof HomeFragment) {
-                        ((HomeFragment) f).getGoogleMap().setMyLocationEnabled(true);
+                        ((HomeFragment) f).getGoogleMapFriends().setMyLocationEnabled(true);
+                        ((HomeFragment) f).getGoogleMapDiscos().setMyLocationEnabled(true);
                     }
                 }
             }

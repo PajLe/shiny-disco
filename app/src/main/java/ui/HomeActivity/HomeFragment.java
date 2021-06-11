@@ -24,8 +24,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class HomeFragment extends Fragment {
 
-    MapView mMapView;
-    private GoogleMap googleMap;
+    MapView mMapViewFriends;
+    private GoogleMap googleMapFriends;
+
+    MapView mMapViewDiscos;
+    private GoogleMap googleMapDiscos;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -34,7 +37,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -42,10 +44,13 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mMapView = (MapView) rootView.findViewById(R.id.mapView);
-        mMapView.onCreate(savedInstanceState);
+        mMapViewFriends = rootView.findViewById(R.id.mapViewFriends);
+        mMapViewFriends.onCreate(savedInstanceState);
+        mMapViewFriends.onResume(); // needed to get the map to display immediately
 
-        mMapView.onResume(); // needed to get the map to display immediately
+        mMapViewDiscos = rootView.findViewById(R.id.mapViewDiscos);
+        mMapViewDiscos.onCreate(savedInstanceState);
+        mMapViewDiscos.onResume(); // needed to get the map to display immediately
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -53,37 +58,52 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        mMapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap mMap) {
-                googleMap = mMap;
+        mMapViewFriends.getMapAsync(mMap -> {
+            googleMapFriends = mMap;
 
-                // For showing a move to my location button
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                } else {
-                    googleMap.setMyLocationEnabled(true);
-                }
-
-                // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
-
-                // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            // For showing a move to my location button
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            } else {
+                googleMapFriends.setMyLocationEnabled(true);
             }
 
+            // For dropping a marker at a point on the Map
+            LatLng sydney = new LatLng(-34, 151);
+            googleMapFriends.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
+            // For zooming automatically to the location of the marker
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+            googleMapFriends.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        });
 
+        mMapViewDiscos.getMapAsync(mMap -> {
+            googleMapDiscos = mMap;
+
+            // For showing a move to my location button
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            } else {
+                googleMapDiscos.setMyLocationEnabled(true);
+            }
+
+            // For dropping a marker at a point on the Map
+            LatLng sydney = new LatLng(-34, 30);
+            googleMapDiscos.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+
+            // For zooming automatically to the location of the marker
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+            googleMapDiscos.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         });
 
         return rootView;
     }
 
-    public GoogleMap getGoogleMap() {
-        return googleMap;
+    public GoogleMap getGoogleMapFriends() {
+        return googleMapFriends;
     }
 
-
+    public GoogleMap getGoogleMapDiscos() {
+        return googleMapDiscos;
+    }
 }
