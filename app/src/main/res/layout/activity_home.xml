@@ -34,11 +34,11 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-<!--        <androidx.fragment.app.FragmentContainerView-->
-<!--            android:id="@+id/fragment_container"-->
-<!--            android:name="ui.TestActivity.TestFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/home_fragment_container"
+            android:name="ui.HomeActivity.HomeFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
