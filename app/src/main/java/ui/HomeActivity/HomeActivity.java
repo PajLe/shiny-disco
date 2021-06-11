@@ -24,6 +24,7 @@ import com.example.shinydisco.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -90,19 +91,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
                     User user = task.getResult().getValue(User.class);
-//                    URL url_value = null;
-//                    try {
-//                        url_value = new URL(user.getImageUri().toString());
-//                    } catch (MalformedURLException e) {
-//                        e.printStackTrace();
-//                    }
-//                    Bitmap image = null;
-//                    try {
-//                        image = BitmapFactory.decodeStream(url_value.openConnection().getInputStream());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    profileImageView.setImageBitmap(image);
+                    Picasso.get().load(user.getImageUrl()).into(profileImageView);
                     usernameTextView.setText(user.getUsername());
                     emailTextView.setText(user.getEmail());
                 }
