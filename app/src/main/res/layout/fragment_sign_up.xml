@@ -86,7 +86,8 @@
             android:src="@android:drawable/ic_menu_camera"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_password_input" />
+            app:layout_constraintTop_toBottomOf="@+id/register_password_input"
+            tools:src="@drawable/user_image" />
 
         <EditText
             android:id="@+id/register_password_input"
