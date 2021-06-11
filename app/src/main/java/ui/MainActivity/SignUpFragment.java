@@ -173,12 +173,13 @@ public class SignUpFragment extends Fragment {
                         dbUser.setUsername(username);
                         dbUser.setPassword(password);
 
-                        Firebase.getStorageRef().child(Firebase.STORAGE_USER_PHOTOS).child(username + "_" + new Date()).putBytes(imageBytes)
+                        Firebase.getStorageRef().child(Firebase.STORAGE_USER_PHOTOS).child(username + "_" + new Date() + ".jpg").putBytes(imageBytes)
                                 .addOnFailureListener(e -> Toast.makeText(getActivity(), "Couldn't upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show())
                                 .addOnSuccessListener(ts -> {
-                                    dbUser.setImageUrl(ts.getMetadata().getReference().getDownloadUrl().toString());
-//                                    ts.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(dbUser::setImageUri); // equivalent to dbUser.setImageUri(downloaded);
-                                    Firebase.getDbRef().child(Firebase.DB_USERS).child(uid).setValue(dbUser);
+                                    ts.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(dUrl -> {
+                                        dbUser.setImageUrl(dUrl.toString());
+                                        Firebase.getDbRef().child(Firebase.DB_USERS).child(uid).setValue(dbUser);
+                                    });
                                     updateUI(user);
                                 });
 
