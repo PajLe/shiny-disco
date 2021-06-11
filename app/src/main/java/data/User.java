@@ -1,5 +1,7 @@
 package data;
 
+import android.net.Uri;
+
 public class User {
     private String uid;
     private String username;
@@ -7,6 +9,7 @@ public class User {
     private String email;
     private String name;
     private String imageUrl;
+    private Uri imageUri;
 
     public String getUsername() {
         return username;
@@ -54,5 +57,13 @@ public class User {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Uri getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
     }
 }

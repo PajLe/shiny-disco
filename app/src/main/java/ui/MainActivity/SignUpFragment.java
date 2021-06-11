@@ -177,6 +177,7 @@ public class SignUpFragment extends Fragment {
                                 .addOnFailureListener(e -> Toast.makeText(getActivity(), "Couldn't upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show())
                                 .addOnSuccessListener(ts -> {
                                     dbUser.setImageUrl(ts.getMetadata().getReference().getDownloadUrl().toString());
+//                                    ts.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(dbUser::setImageUri); // equivalent to dbUser.setImageUri(downloaded);
                                     Firebase.getDbRef().child(Firebase.DB_USERS).child(uid).setValue(dbUser);
                                     updateUI(user);
                                 });

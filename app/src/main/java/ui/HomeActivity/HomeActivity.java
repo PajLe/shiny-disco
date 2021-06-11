@@ -8,19 +8,32 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shinydisco.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import data.User;
 import ui.MainActivity.MainActivity;
+import utils.Firebase;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,6 +44,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private ImageView profileImageView;
+    private TextView usernameTextView;
+    private TextView emailTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +61,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        profileImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_profile_image);
+        usernameTextView = navigationView.getHeaderView(0).findViewById(R.id.nav_username);
+        emailTextView = navigationView.getHeaderView(0).findViewById(R.id.nav_email);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -57,6 +76,38 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        initializeUserInNavBar();
+    }
+
+    private void initializeUserInNavBar() {
+        FirebaseUser loggedInUser = Firebase.getFirebaseAuth().getCurrentUser();
+        if (loggedInUser != null) {
+            String uid = loggedInUser.getUid();
+
+            Firebase.getDbRef().child(Firebase.DB_USERS).child(uid).get().addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    User user = task.getResult().getValue(User.class);
+//                    URL url_value = null;
+//                    try {
+//                        url_value = new URL(user.getImageUri().toString());
+//                    } catch (MalformedURLException e) {
+//                        e.printStackTrace();
+//                    }
+//                    Bitmap image = null;
+//                    try {
+//                        image = BitmapFactory.decodeStream(url_value.openConnection().getInputStream());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    profileImageView.setImageBitmap(image);
+                    usernameTextView.setText(user.getUsername());
+                    emailTextView.setText(user.getEmail());
+                }
+            });
+        }
     }
 
     @Override

@@ -12,5 +12,6 @@
     <string name="closeNavBar">Navigation bar close</string>
     <string name="app">App</string>
     <string name="sign_out">Sign out</string>
+    <string name="nav_profile_image_content_description">Profile image of the logged in user</string>
 
 </resources>
