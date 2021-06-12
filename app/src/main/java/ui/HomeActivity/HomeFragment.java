@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.shinydisco.R;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -61,29 +62,36 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
 
+        setupFriendsMap();
+
+        setupDiscosMap();
+
+        return rootView;
+    }
+
+    private void setupFriendsMap() {
         mMapViewFriends.getMapAsync(mMap -> {
             googleMapFriends = mMap;
 
-            // For showing a move to my location button
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             } else {
+                // For showing a move to my location button
                 googleMapFriends.setMyLocationEnabled(true);
-            }
 
-            Bundle fullScreenBundle = new Bundle();
+                // For zooming automatically to the current user location of the marker
+                zoomToLastKnownLocation(googleMapFriends);
+            }
 
             // For dropping a marker at a point on the Map
             LatLng sydney = new LatLng(-34, 151);
-            fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
             googleMapFriends.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
-            // For zooming automatically to the location of the marker
-//            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-//            googleMapFriends.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+            Bundle fullScreenBundle = new Bundle();
+            fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
             fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_purple);
             fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.friends_nearby);
+
             googleMapFriends.setOnMapClickListener(map -> {
                 getParentFragmentManager().beginTransaction()
                         .add(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
@@ -92,30 +100,31 @@ public class HomeFragment extends Fragment {
                         .commit();
             });
         });
+    }
 
+    private void setupDiscosMap() {
         mMapViewDiscos.getMapAsync(mMap -> {
             googleMapDiscos = mMap;
 
-            // For showing a move to my location button
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             } else {
+                // For showing a move to my location button
                 googleMapDiscos.setMyLocationEnabled(true);
-            }
 
-            Bundle fullScreenBundle = new Bundle();
+                // For zooming automatically to the current user location of the marker
+                zoomToLastKnownLocation(googleMapDiscos);
+            }
 
             // For dropping a marker at a point on the Map
             LatLng sydney = new LatLng(-34, 30);
-            fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
             googleMapDiscos.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
-            // For zooming automatically to the location of the marker
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-            googleMapDiscos.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+            Bundle fullScreenBundle = new Bundle();
+            fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
             fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_pink);
             fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.explore_discos);
+
             googleMapDiscos.setOnMapClickListener(map -> {
                 getParentFragmentManager().beginTransaction()
                         .add(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
@@ -124,8 +133,6 @@ public class HomeFragment extends Fragment {
                         .commit();
             });
         });
-
-        return rootView;
     }
 
     public GoogleMap getGoogleMapFriends() {
@@ -134,5 +141,15 @@ public class HomeFragment extends Fragment {
 
     public GoogleMap getGoogleMapDiscos() {
         return googleMapDiscos;
+    }
+
+    public void zoomToLastKnownLocation(GoogleMap map) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            LocationServices.getFusedLocationProviderClient(getActivity()).getLastLocation()
+                .addOnSuccessListener(location -> {
+                    LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLatLng).zoom(12).build();
+                    map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                });
     }
 }

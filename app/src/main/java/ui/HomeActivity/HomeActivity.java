@@ -138,8 +138,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     Fragment f = fragmentManager.findFragmentById(R.id.home_fragment_container);
 
                     if (f instanceof HomeFragment) {
-                        ((HomeFragment) f).getGoogleMapFriends().setMyLocationEnabled(true);
-                        ((HomeFragment) f).getGoogleMapDiscos().setMyLocationEnabled(true);
+                        HomeFragment hf = (HomeFragment) f;
+                        hf.getGoogleMapFriends().setMyLocationEnabled(true);
+                        hf.getGoogleMapDiscos().setMyLocationEnabled(true);
+
+                        hf.zoomToLastKnownLocation(hf.getGoogleMapDiscos());
+                        hf.zoomToLastKnownLocation(hf.getGoogleMapFriends());
                     }
                 }
             }
