@@ -2,15 +2,18 @@ package ui.HomeActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.shinydisco.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -68,13 +71,26 @@ public class HomeFragment extends Fragment {
                 googleMapFriends.setMyLocationEnabled(true);
             }
 
+            Bundle fullScreenBundle = new Bundle();
+
             // For dropping a marker at a point on the Map
             LatLng sydney = new LatLng(-34, 151);
+            fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
             googleMapFriends.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
             // For zooming automatically to the location of the marker
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-            googleMapFriends.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+//            googleMapFriends.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+            fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_purple);
+            fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.friends_nearby);
+            googleMapFriends.setOnMapClickListener(map -> {
+                getParentFragmentManager().beginTransaction()
+                        .add(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
+            });
         });
 
         mMapViewDiscos.getMapAsync(mMap -> {
@@ -87,13 +103,26 @@ public class HomeFragment extends Fragment {
                 googleMapDiscos.setMyLocationEnabled(true);
             }
 
+            Bundle fullScreenBundle = new Bundle();
+
             // For dropping a marker at a point on the Map
             LatLng sydney = new LatLng(-34, 30);
+            fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
             googleMapDiscos.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
             // For zooming automatically to the location of the marker
             CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
             googleMapDiscos.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+            fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_pink);
+            fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.explore_discos);
+            googleMapDiscos.setOnMapClickListener(map -> {
+                getParentFragmentManager().beginTransaction()
+                        .add(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
+            });
         });
 
         return rootView;

@@ -16,5 +16,6 @@
     <string name="friends_nearby">Friends nearby</string>
     <string name="explore_discos">Explore discos</string>
     <string name="logotext_bkg_light_description">Text logo of the application</string>
+    <string name="map">Map</string>
 
 </resources>
