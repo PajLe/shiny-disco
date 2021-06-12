@@ -48,13 +48,13 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mMapViewFriends = rootView.findViewById(R.id.mapViewFriends);
-        mMapViewFriends.onCreate(savedInstanceState);
-        mMapViewFriends.onResume(); // needed to get the map to display immediately
-
         mMapViewDiscos = rootView.findViewById(R.id.mapViewDiscos);
         mMapViewDiscos.onCreate(savedInstanceState);
         mMapViewDiscos.onResume(); // needed to get the map to display immediately
+
+        mMapViewFriends = rootView.findViewById(R.id.mapViewFriends);
+        mMapViewFriends.onCreate(savedInstanceState);
+        mMapViewFriends.onResume(); // needed to get the map to display immediately
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
 
             googleMapFriends.setOnMapClickListener(map -> {
                 getParentFragmentManager().beginTransaction()
-                        .add(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
+                        .replace(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
                         .commit();
@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment {
 
             googleMapDiscos.setOnMapClickListener(map -> {
                 getParentFragmentManager().beginTransaction()
-                        .add(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
+                        .replace(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
                         .commit();
