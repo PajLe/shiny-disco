@@ -53,6 +53,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView emailTextView;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        initializeUserInNavBar();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -82,8 +88,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-        initializeUserInNavBar();
 
         fragmentManager.beginTransaction()
                 .replace(R.id.home_fragment_container, HomeFragment.class, null)
