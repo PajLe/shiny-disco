@@ -1,6 +1,7 @@
 package ui.HomeActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -10,11 +11,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shinydisco.R;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -23,6 +27,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import data.Disco;
 
@@ -41,6 +46,7 @@ public class FullScreenMapFragment extends Fragment {
     private MapView mMapViewFullScreen;
     private GoogleMap googleMap;
     private TextView mapNameView;
+    private FloatingActionButton addDiscoButton;
 
     private FullScreenMapViewModel viewModel;
 
@@ -77,7 +83,7 @@ public class FullScreenMapFragment extends Fragment {
         switch (mapViewId) {
 //            case R.id.mapViewFriends:
 //                viewModel.friendsLiveData.observe(this, discos -> {
-//                    //set on map or something adapter.setDiscos(discos);
+//                    //set on map or something
 //                });
 //                break;
             case R.id.explore_discos_image:
@@ -104,6 +110,23 @@ public class FullScreenMapFragment extends Fragment {
         mMapViewFullScreen.onCreate(savedInstanceState);
         mMapViewFullScreen.onResume(); // needed to get the map to display immediately
         mapNameView = rootView.findViewById(R.id.map_name);
+        addDiscoButton = rootView.findViewById(R.id.add_disco_button);
+
+        if (mapViewId != R.id.explore_discos_image) {
+            addDiscoButton.setVisibility(View.GONE);
+        } else {
+            addDiscoButton.setOnClickListener(btn -> {
+                Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
+
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                        && mapViewId == R.id.explore_discos_image)
+                    LocationServices.getFusedLocationProviderClient(getActivity()).getLastLocation()
+                            .addOnSuccessListener(location -> {
+                                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                                // start new fragment for adding disco
+                            });
+            });
+        }
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -131,8 +154,13 @@ public class FullScreenMapFragment extends Fragment {
 
             if (mapNameColorResId != 0)
                 mapNameView.setTextColor(ContextCompat.getColor(getContext(), mapNameColorResId));
+
+
         });
+
+
 
         return rootView;
     }
+
 }
