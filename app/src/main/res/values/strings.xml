@@ -20,5 +20,10 @@
     <string name="explore_discos_image_description">Clickable image to open map for disco exploring</string>
     <string name="add_disco_button_description">Button to add new disco</string>
     <string name="dark_style_map_id">47898b2ea0ef37a2</string>
+    <string name="add_disco">Add disco</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="zero_number">0</string>
+
 
 </resources>

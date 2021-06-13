@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import data.Disco;
+import ui.AddDiscoScreen.AddDiscoFragment;
 
 public class FullScreenMapFragment extends Fragment {
 
@@ -116,14 +117,19 @@ public class FullScreenMapFragment extends Fragment {
             addDiscoButton.setVisibility(View.GONE);
         } else {
             addDiscoButton.setOnClickListener(btn -> {
-                Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
-
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                         && mapViewId == R.id.explore_discos_image)
                     LocationServices.getFusedLocationProviderClient(getActivity()).getLastLocation()
                             .addOnSuccessListener(location -> {
                                 LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                                // start new fragment for adding disco
+                                Bundle addDiscoBundle = new Bundle();
+                                addDiscoBundle.putParcelable("location", currentLatLng);
+
+                                getParentFragmentManager().beginTransaction()
+                                        .replace(R.id.home_fragment_container, AddDiscoFragment.class, addDiscoBundle)
+                                        .setReorderingAllowed(true)
+                                        .addToBackStack(null)
+                                        .commit();
                             });
             });
         }
