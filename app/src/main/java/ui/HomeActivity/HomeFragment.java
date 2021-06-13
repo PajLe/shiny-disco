@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.shinydisco.R;
@@ -31,8 +32,7 @@ public class HomeFragment extends Fragment {
     MapView mMapViewFriends;
     private GoogleMap googleMapFriends;
 
-    MapView mMapViewDiscos;
-    private GoogleMap googleMapDiscos;
+    private ImageView exploreDiscosImageView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -48,9 +48,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mMapViewDiscos = rootView.findViewById(R.id.mapViewDiscos);
-        mMapViewDiscos.onCreate(savedInstanceState);
-        mMapViewDiscos.onResume(); // needed to get the map to display immediately
+        exploreDiscosImageView = rootView.findViewById(R.id.explore_discos_image);
 
         mMapViewFriends = rootView.findViewById(R.id.mapViewFriends);
         mMapViewFriends.onCreate(savedInstanceState);
@@ -103,44 +101,26 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupDiscosMap() {
-        mMapViewDiscos.getMapAsync(mMap -> {
-            googleMapDiscos = mMap;
 
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            } else {
-                // For showing a move to my location button
-                googleMapDiscos.setMyLocationEnabled(true);
+        // For dropping a marker at a point on the Map
+        LatLng sydney = new LatLng(-34, 30);
 
-                // For zooming automatically to the current user location of the marker
-                zoomToLastKnownLocation(googleMapDiscos);
-            }
+        Bundle fullScreenBundle = new Bundle();
+        fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
+        fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_pink);
+        fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.explore_discos);
 
-            // For dropping a marker at a point on the Map
-            LatLng sydney = new LatLng(-34, 30);
-            googleMapDiscos.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
-
-            Bundle fullScreenBundle = new Bundle();
-            fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
-            fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_pink);
-            fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.explore_discos);
-
-            googleMapDiscos.setOnMapClickListener(map -> {
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
-                        .setReorderingAllowed(true)
-                        .addToBackStack(null)
-                        .commit();
-            });
+        exploreDiscosImageView.setOnClickListener(view -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.home_fragment_container, FullScreenMapFragment.class, fullScreenBundle)
+                    .setReorderingAllowed(true)
+                    .addToBackStack(null)
+                    .commit();
         });
     }
 
     public GoogleMap getGoogleMapFriends() {
         return googleMapFriends;
-    }
-
-    public GoogleMap getGoogleMapDiscos() {
-        return googleMapDiscos;
     }
 
     public void zoomToLastKnownLocation(GoogleMap map) {
