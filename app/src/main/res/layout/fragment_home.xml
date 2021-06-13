@@ -62,11 +62,11 @@
             android:layout_height="237dp"
             android:contentDescription="@string/explore_discos_image_description"
             android:scaleType="centerCrop"
-            android:src="@drawable/explore_discos"
+            android:src="@drawable/explore_discos_googlemap"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mapViewFriends" />
+            app:layout_constraintTop_toBottomOf="@+id/mapViewFriends"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
