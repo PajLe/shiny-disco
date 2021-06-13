@@ -9,6 +9,7 @@ import com.google.firebase.storage.StorageReference;
 public class Firebase {
     // realtime db
     public static final String DB_USERS = "users"; // "tables"
+    public static final String DB_DISCOS = "discos"; // "tables"
 
     private static DatabaseReference dbRef = FirebaseDatabase.getInstance("https://shiny-disco-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 

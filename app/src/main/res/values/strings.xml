@@ -18,5 +18,6 @@
     <string name="logotext_bkg_light_description">Text logo of the application</string>
     <string name="map">Map</string>
     <string name="explore_discos_image_description">Clickable image to open map for disco exploring</string>
+    <string name="dark_style_map_id">47898b2ea0ef37a2</string>
 
 </resources>

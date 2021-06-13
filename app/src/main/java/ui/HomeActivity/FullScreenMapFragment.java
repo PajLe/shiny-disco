@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,20 +23,25 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import data.Disco;
+
 public class FullScreenMapFragment extends Fragment {
 
     public static final String ARG_MARKER = "marker_latLng";
+    public static final String ARG_MAP_VIEW_ID = "map_view_id";
     public static final String ARG_MAP_NAME_ID = "map_name";
     public static final String ARG_MAP_NAME_COLOR_ID = "map_name_color";
 
     private LatLng markerLatLng;
     private int mapNameResId;
     private int mapNameColorResId;
+    private int mapViewId;
 
-    MapView mMapViewFullScreen;
+    private MapView mMapViewFullScreen;
     private GoogleMap googleMap;
-    TextView mapNameView;
+    private TextView mapNameView;
 
+    private FullScreenMapViewModel viewModel;
 
     public FullScreenMapFragment() {
         // Required empty public constructor
@@ -58,7 +64,34 @@ public class FullScreenMapFragment extends Fragment {
             markerLatLng = arguments.getParcelable(ARG_MARKER);
             mapNameResId = arguments.getInt(ARG_MAP_NAME_ID);
             mapNameColorResId = arguments.getInt(ARG_MAP_NAME_COLOR_ID);
+            mapViewId = arguments.getInt(ARG_MAP_VIEW_ID);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        viewModel = new ViewModelProvider(this).get(FullScreenMapViewModel.class);
+        switch (mapViewId) {
+//            case R.id.mapViewFriends:
+//                viewModel.friendsLiveData.observe(this, discos -> {
+//                    //set on map or something adapter.setDiscos(discos);
+//                });
+//                break;
+            case R.id.explore_discos_image:
+                viewModel.discosLiveData.observe(this, discos -> {
+                    for (Disco d : discos) {
+                        MarkerOptions marker = new MarkerOptions();
+                        marker.position(d.getPosition());
+                        marker.title(d.getName());
+
+                        googleMap.addMarker(marker);
+                    }
+                });
+                break;
+        }
+
     }
 
     @Override

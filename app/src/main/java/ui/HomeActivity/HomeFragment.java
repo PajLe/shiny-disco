@@ -89,6 +89,7 @@ public class HomeFragment extends Fragment {
             fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
             fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_purple);
             fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.friends_nearby);
+            fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_VIEW_ID, R.id.mapViewFriends);
 
             googleMapFriends.setOnMapClickListener(map -> {
                 getParentFragmentManager().beginTransaction()
@@ -109,6 +110,7 @@ public class HomeFragment extends Fragment {
         fullScreenBundle.putParcelable(FullScreenMapFragment.ARG_MARKER, sydney);
         fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_COLOR_ID, R.color.shiny_disco_pink);
         fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_NAME_ID, R.string.explore_discos);
+        fullScreenBundle.putInt(FullScreenMapFragment.ARG_MAP_VIEW_ID, R.id.explore_discos_image);
 
         exploreDiscosImageView.setOnClickListener(view -> {
             getParentFragmentManager().beginTransaction()
