@@ -7,6 +7,19 @@
     tools:context="ui.AddDiscoScreen.AddDiscoFragment">
 
     <TextView
+        android:id="@+id/disco_rating_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/rating"
+        android:textColor="@color/shiny_disco_purple"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_disco_price" />
+
+    <TextView
         android:id="@+id/disco_latitude_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,25 +98,29 @@
         android:inputType="textPersonName"
         android:textColor="@color/shiny_disco_purple"
         android:textColorHint="@color/shiny_disco_purple"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/disco_longitude_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/disco_longitude_textview"
+        />
 
     <utils.MultiSpinner
         android:id="@+id/spinner_disco_music"
-        android:layout_width="206dp"
-        android:layout_height="36dp"
+        android:layout_width="209dp"
+        android:layout_height="41dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
         android:entries="@array/music"
         android:spinnerMode="dialog"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/disco_name_input">
+        app:layout_constraintTop_toBottomOf="@+id/disco_name_input"
+        >
 
     </utils.MultiSpinner>
 
     <Spinner
         android:id="@+id/spinner_disco_price"
+        style="@style/Theme.ShinyDisco"
         android:layout_width="218dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
@@ -116,14 +133,15 @@
 
     <Spinner
         android:id="@+id/spinner_disco_rating"
-        android:layout_width="218dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="87dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
         android:entries="@array/rating"
+        android:spinnerDropDownItemStyle="@style/Theme.ShinyDisco"
         android:spinnerMode="dialog"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/disco_rating_textview"
         app:layout_constraintTop_toBottomOf="@+id/spinner_disco_price" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

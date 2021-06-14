@@ -24,6 +24,7 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="zero_number">0</string>
+    <string name="rating">Rating</string>
 
 
 </resources>

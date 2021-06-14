@@ -131,9 +131,11 @@ public class HomeFragment extends Fragment {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             LocationServices.getFusedLocationProviderClient(getActivity()).getLastLocation()
                 .addOnSuccessListener(location -> {
-                    LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLatLng).zoom(12).build();
-                    map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    if (location != null) {
+                        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLatLng).zoom(12).build();
+                        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    }
                 });
     }
 }
