@@ -18,7 +18,7 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
 
     private List<String> items;
     private List<Boolean> selected;
-    private String defaultText;
+    private String defaultText = "Music";
     private MultiSpinnerListener listener;
 
     public MultiSpinner(Context context) {
@@ -73,7 +73,7 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
         } else {
             spinnerText = defaultText;
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item,
                 new String[] { spinnerText });
         setAdapter(adapter);
