@@ -18,7 +18,7 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
 
     private List<String> items;
     private List<Boolean> selected;
-    private String defaultText = "Music";
+    private String defaultText = "Unknown";
     private MultiSpinnerListener listener;
 
     public MultiSpinner(Context context) {

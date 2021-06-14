@@ -21,13 +21,20 @@
     </style>
 
     <style name="SpinnerItem" parent="@android:style/Widget.TextView.SpinnerItem">
-        <item name="android:textColor">@color/shiny_disco_purple</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/shiny_disco_light_cyan</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="SpinnerItem.DropDownItem" parent="@android:style/Widget.DropDownItem.Spinner">
-        <item name="android:textColor">@color/shiny_disco_purple</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/shiny_disco_light_cyan</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/spinner_background</item>
+    </style>
+
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:textColor">@color/shiny_disco_light_cyan</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/spinner_background</item>
     </style>
 
 </resources>
