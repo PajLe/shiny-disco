@@ -107,7 +107,6 @@ public class SignUpFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            // TODO add check for password (has to be more than 6 characters) and valid email
             String usernameInput = usernameEditText.getText().toString().trim();
             String passwordInput = passwordEditText.getText().toString().trim();
             String emailInput = emailEditText.getText().toString().trim();
@@ -116,7 +115,8 @@ public class SignUpFragment extends Fragment {
             signUpButton.setEnabled(!usernameInput.isEmpty()
                 && !passwordInput.isEmpty()
                 && !emailInput.isEmpty()
-                && !nameInput.isEmpty());
+                && !nameInput.isEmpty()
+                && passwordInput.length() > 6);
         }
 
         @Override
