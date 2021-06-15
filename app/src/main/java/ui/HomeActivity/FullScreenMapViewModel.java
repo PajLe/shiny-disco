@@ -34,7 +34,7 @@ public class FullScreenMapViewModel extends ViewModel {
 
     public LiveData<List<Disco>> getDiscos() {
         if (discosLiveData.getValue() == null) {
-            discoDbRef.child(Firebase.DB_DISCOS).addListenerForSingleValueEvent(discosEventListener);
+            discoDbRef.child(Firebase.DB_DISCOS).addValueEventListener(discosEventListener);
         }
 
         return discosLiveData;

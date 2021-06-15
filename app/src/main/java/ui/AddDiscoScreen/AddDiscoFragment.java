@@ -211,7 +211,7 @@ public class AddDiscoFragment extends Fragment {
         Toast.makeText(getContext(), "Successfully added a disco", Toast.LENGTH_SHORT).show();
         getParentFragmentManager()
                 .popBackStack();
-        getParentFragmentManager()
-                .popBackStack();
+//        getParentFragmentManager()
+//                .popBackStack();
     }
 }
