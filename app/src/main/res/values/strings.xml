@@ -32,6 +32,8 @@
     <string name="music_colon">Music:</string>
     <string name="pricing">Pricing</string>
     <string name="pricing_colon">Pricing:</string>
+    <string name="disco_image_button_description">Image for disco to be added</string>
+
 
 
 </resources>

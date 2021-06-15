@@ -29,6 +29,9 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import data.Disco;
 import ui.AddDiscoScreen.AddDiscoFragment;
 
@@ -46,6 +49,8 @@ public class FullScreenMapFragment extends Fragment {
 
     private MapView mMapViewFullScreen;
     private GoogleMap googleMap;
+    private List<MarkerOptions> googleMapMarkers;
+
     private TextView mapNameView;
     private FloatingActionButton addDiscoButton;
 
@@ -67,6 +72,7 @@ public class FullScreenMapFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Bundle arguments = getArguments();
         if (arguments != null) {
             markerLatLng = arguments.getParcelable(ARG_MARKER);
@@ -88,12 +94,15 @@ public class FullScreenMapFragment extends Fragment {
 //                });
 //                break;
             case R.id.explore_discos_image:
-                viewModel.discosLiveData.observe(this, discos -> {
+                viewModel.getDiscos().observe(this, discos -> {
+                    googleMapMarkers = new ArrayList<>();
+
                     for (Disco d : discos) {
                         MarkerOptions marker = new MarkerOptions();
-                        marker.position(d.getPosition());
+                        marker.position(new LatLng(d.getLat(), d.getLon()));
                         marker.title(d.getName());
 
+                        googleMapMarkers.add(marker);
                         googleMap.addMarker(marker);
                     }
                 });
@@ -151,9 +160,6 @@ public class FullScreenMapFragment extends Fragment {
                 googleMap.setMyLocationEnabled(true);
             }
 
-            if (markerLatLng != null)
-                googleMap.addMarker(new MarkerOptions().position(markerLatLng).title("Marker Title").snippet("Marker Description"));
-
             if (mapNameResId != 0) {
                 mapNameView.setText(mapNameResId);
             }
@@ -161,10 +167,12 @@ public class FullScreenMapFragment extends Fragment {
             if (mapNameColorResId != 0)
                 mapNameView.setTextColor(ContextCompat.getColor(getContext(), mapNameColorResId));
 
+            if (googleMapMarkers != null) {
+                for (MarkerOptions marker : googleMapMarkers)
+                    googleMap.addMarker(marker);
+            }
 
         });
-
-
 
         return rootView;
     }

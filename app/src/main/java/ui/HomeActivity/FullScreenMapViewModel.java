@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +29,6 @@ public class FullScreenMapViewModel extends ViewModel {
 
     public FullScreenMapViewModel() {
         discoDbRef = Firebase.getDbRef();
-        getDiscos();
 //        getFriends();
     }
 

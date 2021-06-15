@@ -16,9 +16,9 @@ import java.util.List;
 public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner implements
         DialogInterface.OnMultiChoiceClickListener, DialogInterface.OnCancelListener {
 
-    private List<String> items;
-    private List<Boolean> selected;
-    private String defaultText = "Unknown";
+    private final List<String> items;
+    private final List<Boolean> selected;
+    private final String defaultText = "";
     private MultiSpinnerListener listener;
 
     public MultiSpinner(Context context) {
@@ -28,6 +28,10 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
         for (int i = 0; i < items.size(); i++) {
             selected.add(false);
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item,
+                new String[] { defaultText });
+        setAdapter(adapter);
     }
 
     public MultiSpinner(Context arg0, AttributeSet arg1) {
@@ -37,6 +41,10 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
         for (int i = 0; i < items.size(); i++) {
             selected.add(false);
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item,
+                new String[] { defaultText });
+        setAdapter(adapter);
     }
 
     public MultiSpinner(Context arg0, AttributeSet arg1, int arg2) {
@@ -46,6 +54,10 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
         for (int i = 0; i < items.size(); i++) {
             selected.add(false);
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item,
+                new String[] { defaultText });
+        setAdapter(adapter);
     }
 
     @Override
@@ -78,7 +90,7 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
                 new String[] { spinnerText });
         setAdapter(adapter);
         if (listener != null)
-            listener.onItemsSelected(selected);
+            listener.onItemsSelected(selected, items);
     }
 
     @Override
@@ -99,7 +111,21 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
     }
 
     public interface MultiSpinnerListener {
-        public void onItemsSelected(List<Boolean> selected);
+        void onItemsSelected(List<Boolean> selected, List<String> items);
+    }
+
+    public void addOnItemsSelectedListener(MultiSpinnerListener listener) {
+        this.listener = listener;
+    }
+
+    public List<String> getSelected() {
+        List<String> toRet = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            if (selected.get(i))
+                toRet.add(items.get(i));
+        }
+
+        return toRet;
     }
 
     private boolean[] convertToPrimitiveBoolean(List<Boolean> bools) {

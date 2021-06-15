@@ -2,7 +2,8 @@ package data;
 
 public class Rating {
     private double rating;
-    private User ratedBy;
+    private String ratedById;
+    private String ratedDiscoId;
 
     public double getRating() {
         return rating;
@@ -12,11 +13,19 @@ public class Rating {
         this.rating = rating;
     }
 
-    public User getRatedBy() {
-        return ratedBy;
+    public String getRatedById() {
+        return ratedById;
     }
 
-    public void setRatedBy(User ratedBy) {
-        this.ratedBy = ratedBy;
+    public void setRatedById(String ratedById) {
+        this.ratedById = ratedById;
+    }
+
+    public String getRatedDiscoId() {
+        return ratedDiscoId;
+    }
+
+    public void setRatedDiscoId(String ratedDiscoId) {
+        this.ratedDiscoId = ratedDiscoId;
     }
 }

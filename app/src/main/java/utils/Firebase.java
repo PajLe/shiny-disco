@@ -19,6 +19,7 @@ public class Firebase {
 
     // storage
     public static final String STORAGE_USER_PHOTOS = "users/photos";
+    public static final String STORAGE_DISCO_PHOTOS = "discos/photos";
 
     private static StorageReference storageRef = FirebaseStorage.getInstance("gs://shiny-disco.appspot.com").getReference();
 

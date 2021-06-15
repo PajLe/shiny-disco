@@ -9,6 +9,20 @@ public class User {
     private String email;
     private String name;
     private String imageUrl;
+    private String rank;
+    private int rankPoints; // 0-2 newbie; 3-5 party guy; 6+ party monster
+
+    public User() {
+        updateRankBasedOnCurrentPoints();
+    }
+
+    public int getRankPoints() {
+        return rankPoints;
+    }
+
+    public void setRankPoints(int rankPoints) {
+        this.rankPoints = rankPoints;
+    }
 
     public String getUsername() {
         return username;
@@ -58,4 +72,25 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    public void increaseRankPoints() {
+        rankPoints++;
+        updateRankBasedOnCurrentPoints();
+    }
+
+    private void updateRankBasedOnCurrentPoints() {
+        if (rankPoints < 3)
+            rank = "Newbie";
+        else if (rankPoints < 6)
+            rank = "Party guy";
+        else
+            rank = "Party monster";
+    }
 }

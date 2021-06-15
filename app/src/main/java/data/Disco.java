@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Disco {
     private String name;
-    private LatLng position;
     private double lat;
     private double lon;
     private String pricing; // Budget;Average;Luxury
     private List<String> musicGenres; // take from select list
     private List<Rating> ratings;
     private double averageRating;
+    private String imageUrl;
 
     public String getName() {
         return name;
@@ -20,16 +20,6 @@ public class Disco {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LatLng getPosition() {
-        if (position == null)
-            return new LatLng(lat, lon);
-        return position;
-    }
-
-    public void setPosition(LatLng position) {
-        this.position = position;
     }
 
     public String getPricing() {
@@ -78,5 +68,13 @@ public class Disco {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
