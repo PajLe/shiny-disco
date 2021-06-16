@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -37,6 +38,7 @@ import java.net.URL;
 
 import data.User;
 import ui.MainActivity.MainActivity;
+import ui.ViewProfileScreen.ViewProfileFragment;
 import utils.Firebase;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +53,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ImageView profileImageView;
     private TextView usernameTextView;
     private TextView emailTextView;
+
+    private User user;
 
     @Override
     protected void onStart() {
@@ -105,7 +109,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
-                    User user = task.getResult().getValue(User.class);
+                    user = task.getResult().getValue(User.class);
                     if (user != null) {
                         Picasso.get().load(user.getImageUrl()).into(profileImageView);
                         usernameTextView.setText(user.getUsername());
@@ -125,6 +129,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 Toast.makeText(HomeActivity.this, "Successfully signed out", Toast.LENGTH_SHORT).show();
                 finish();
+                break;
+            case R.id.view_profile_menu_item:
+                Bundle bundle = new Bundle();
+                if (user != null)
+                    bundle.putString(ViewProfileFragment.ARG_USER_ID, user.getUid());
+                drawerLayout.closeDrawer(Gravity.LEFT, true);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.home_fragment_container, ViewProfileFragment.class, bundle)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
         return false;

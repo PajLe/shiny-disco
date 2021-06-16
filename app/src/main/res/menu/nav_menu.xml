@@ -16,9 +16,14 @@
 <!--        </menu>-->
 <!--    </item>-->
 
-    <item android:title="@string/app"
+    <item android:title="@string/profile"
         >
         <menu>
+            <item android:id="@+id/view_profile_menu_item"
+                android:title="@string/view_profile"
+                android:icon="@drawable/outline_logout_24"
+                app:iconTint="@color/shiny_disco_light_cyan"
+                />
             <item android:id="@+id/sign_out_menu_item"
                 android:title="@string/sign_out"
                 android:icon="@drawable/outline_logout_24"
