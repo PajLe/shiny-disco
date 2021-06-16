@@ -194,6 +194,7 @@ public class AddDiscoFragment extends Fragment {
 
                                         // finally add disco to db
                                         String key = Firebase.getDbRef().push().getKey();
+                                        disco.setId(key);
                                         Firebase.getDbRef().child(Firebase.DB_DISCOS).child(key).setValue(disco);
 
                                         // update user's rank in db
