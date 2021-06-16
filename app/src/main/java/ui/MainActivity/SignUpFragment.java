@@ -146,6 +146,8 @@ public class SignUpFragment extends Fragment {
     };
 
     private View.OnClickListener signupButtonOnClickListener = v -> {
+        signUpButton.setEnabled(false);
+
         String username = usernameEditText.getText().toString();
         String name = nameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -174,18 +176,23 @@ public class SignUpFragment extends Fragment {
                         dbUser.setPassword(password);
 
                         Firebase.getStorageRef().child(Firebase.STORAGE_USER_PHOTOS).child(username + "_" + new Date() + ".jpg").putBytes(imageBytes)
-                                .addOnFailureListener(e -> Toast.makeText(getActivity(), "Couldn't upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e ->  {
+                                    Toast.makeText(getActivity(), "Couldn't upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    signUpButton.setEnabled(true);
+                                })
                                 .addOnSuccessListener(ts -> {
                                     ts.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(dUrl -> {
                                         dbUser.setImageUrl(dUrl.toString());
-                                        Firebase.getDbRef().child(Firebase.DB_USERS).child(uid).setValue(dbUser);
+                                        Firebase.getDbRef().child(Firebase.DB_USERS).child(uid).setValue(dbUser).addOnSuccessListener(unused -> {
+                                            updateUI(user);
+                                        });
                                     });
-                                    updateUI(user);
                                 });
 
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        signUpButton.setEnabled(true);
                         Toast.makeText(getActivity(), "Authentication failed: " + task.getException().getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }

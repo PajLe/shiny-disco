@@ -106,9 +106,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
                     User user = task.getResult().getValue(User.class);
-                    Picasso.get().load(user.getImageUrl()).into(profileImageView);
-                    usernameTextView.setText(user.getUsername());
-                    emailTextView.setText(user.getEmail());
+                    if (user != null) {
+                        Picasso.get().load(user.getImageUrl()).into(profileImageView);
+                        usernameTextView.setText(user.getUsername());
+                        emailTextView.setText(user.getEmail());
+                    }
                 }
             });
         }
