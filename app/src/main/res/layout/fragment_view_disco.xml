@@ -1,0 +1,255 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.ViewDiscoScreen.ViewDiscoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_app_color"
+        tools:context="ui.AddDiscoScreen.AddDiscoFragment">
+
+        <TextView
+            android:id="@+id/disco_ratings_count_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/ratings_colon"
+            android:textColor="@color/shiny_disco_purple"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_rating_textview" />
+
+        <TextView
+            android:id="@+id/disco_ratings_count_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/unknown"
+            android:textColor="@color/shiny_disco_light_cyan"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/disco_ratings_count_textview"
+            app:layout_constraintTop_toBottomOf="@+id/disco_rating_value_textview" />
+
+        <Spinner
+            android:id="@+id/spinner_disco_add_rating"
+            style="@style/SpinnerTheme"
+            android:layout_width="61dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:dropDownWidth="wrap_content"
+            android:entries="@array/rating"
+            android:spinnerDropDownItemStyle="@style/Theme.ShinyDisco"
+            android:spinnerMode="dialog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_ratings_count_textview" />
+
+        <TextView
+            android:id="@+id/disco_music_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/unknown"
+            android:textColor="@color/shiny_disco_light_cyan"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/disco_name_textview"
+            app:layout_constraintTop_toBottomOf="@+id/disco_name_value_textview" />
+
+        <TextView
+            android:id="@+id/disco_pricing_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/unknown"
+            android:textColor="@color/shiny_disco_light_cyan"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/disco_name_textview"
+            app:layout_constraintTop_toBottomOf="@+id/disco_music_value_textview" />
+
+        <TextView
+            android:id="@+id/disco_rating_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/unknown"
+            android:textColor="@color/shiny_disco_light_cyan"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/disco_name_textview"
+            app:layout_constraintTop_toBottomOf="@+id/disco_pricing_value_textview" />
+
+        <TextView
+            android:id="@+id/disco_name_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/disco"
+            android:textColor="@color/shiny_disco_light_cyan"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/disco_name_textview"
+            app:layout_constraintTop_toBottomOf="@+id/disco_longitude_value_textview" />
+
+        <TextView
+            android:id="@+id/disco_pricing_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/pricing_colon"
+            android:textColor="@color/shiny_disco_purple"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_music_textview" />
+
+        <TextView
+            android:id="@+id/disco_music_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/music_colon"
+            android:textColor="@color/shiny_disco_purple"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_name_textview" />
+
+        <TextView
+            android:id="@+id/disco_rating_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/rating_colon"
+            android:textColor="@color/shiny_disco_purple"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_pricing_textview" />
+
+        <TextView
+            android:id="@+id/disco_latitude_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/latitude_colon"
+            android:textColor="@color/shiny_disco_purple"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_disco_text" />
+
+        <TextView
+            android:id="@+id/disco_latitude_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/zero_number"
+            android:textColor="@color/shiny_disco_light_cyan"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/disco_latitude_textview"
+            app:layout_constraintTop_toBottomOf="@+id/view_disco_text" />
+
+        <TextView
+            android:id="@+id/view_disco_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/view_disco"
+            android:textColor="@color/shiny_disco_pink"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/disco_longitude_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/zero_number"
+            android:textColor="@color/shiny_disco_light_cyan"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/disco_longitude_textview"
+            app:layout_constraintTop_toBottomOf="@+id/disco_latitude_value_textview" />
+
+        <TextView
+            android:id="@+id/disco_longitude_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/longitude_colon"
+            android:textColor="@color/shiny_disco_purple"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_latitude_textview" />
+
+        <TextView
+            android:id="@+id/disco_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/name_colon"
+            android:textColor="@color/shiny_disco_purple"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_longitude_textview" />
+
+        <Button
+            android:id="@+id/add_rating_button"
+            android:layout_width="128dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:enabled="true"
+            android:text="@string/add_rating"
+            app:backgroundTint="@color/buttoncolor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.371"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_ratings_count_value_textview" />
+
+        <ImageButton
+            android:id="@+id/disco_image_button"
+            android:layout_width="200dp"
+            android:layout_height="89dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/disco_image_button_description"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disco_rating_textview"
+            app:layout_constraintVertical_bias="0.726" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

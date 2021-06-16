@@ -33,7 +33,12 @@
     <string name="pricing">Pricing</string>
     <string name="pricing_colon">Pricing:</string>
     <string name="disco_image_button_description">Image for disco to be added</string>
-
+    <string name="view_disco">View disco</string>
+    <string name="name_colon">Name:</string>
+    <string name="disco">Disco</string>
+    <string name="unknown">Unknown</string>
+    <string name="add_rating">Add rating</string>
+    <string name="ratings_colon">Ratings:</string>
 
 
 </resources>

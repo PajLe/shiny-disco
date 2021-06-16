@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -29,16 +30,21 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import data.Disco;
 import ui.AddDiscoScreen.AddDiscoFragment;
+import ui.ViewDiscoScreen.ViewDiscoFragment;
+import utils.Firebase;
 
 public class FullScreenMapFragment extends Fragment {
 
@@ -101,6 +107,7 @@ public class FullScreenMapFragment extends Fragment {
 //                break;
             case R.id.explore_discos_image:
                 viewModel.getDiscos().observe(this, discos -> {
+                    googleMap.setOnInfoWindowClickListener(discoClickListener);
                     googleMapMarkers = new ArrayList<>();
                     markerTargets = new ArrayList<>();
 
@@ -113,6 +120,7 @@ public class FullScreenMapFragment extends Fragment {
                                 marker.position(new LatLng(d.getLat(), d.getLon()));
                                 marker.title(d.getName());
                                 marker.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                                marker.snippet(d.getId());
 
                                 googleMapMarkers.add(marker);
                                 googleMap.addMarker(marker);
@@ -203,5 +211,16 @@ public class FullScreenMapFragment extends Fragment {
 
         return rootView;
     }
+
+    GoogleMap.OnInfoWindowClickListener discoClickListener = marker -> {
+        String discoId = marker.getSnippet();
+        Bundle bundle = new Bundle();
+        bundle.putString(ViewDiscoFragment.ARG_DISCO_ID, discoId);
+        getParentFragmentManager().beginTransaction()
+                .add(R.id.home_fragment_container, ViewDiscoFragment.class, bundle)
+                .setReorderingAllowed(true)
+                .addToBackStack(null)
+                .commit();
+    };
 
 }
