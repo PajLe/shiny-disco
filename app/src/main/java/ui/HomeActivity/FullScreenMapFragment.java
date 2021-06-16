@@ -3,6 +3,8 @@ package ui.HomeActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
@@ -23,11 +25,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +55,7 @@ public class FullScreenMapFragment extends Fragment {
     private MapView mMapViewFullScreen;
     private GoogleMap googleMap;
     private List<MarkerOptions> googleMapMarkers;
+    private List<Target> markerTargets;
 
     private TextView mapNameView;
     private FloatingActionButton addDiscoButton;
@@ -96,15 +102,36 @@ public class FullScreenMapFragment extends Fragment {
             case R.id.explore_discos_image:
                 viewModel.getDiscos().observe(this, discos -> {
                     googleMapMarkers = new ArrayList<>();
+                    markerTargets = new ArrayList<>();
 
-                    for (Disco d : discos) {
-                        MarkerOptions marker = new MarkerOptions();
-                        marker.position(new LatLng(d.getLat(), d.getLon()));
-                        marker.title(d.getName());
+                    for (int i = 0; i < discos.size(); i++) {
+                        Disco d = discos.get(i);
+                        markerTargets.add(new Target() {
+                            @Override
+                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                MarkerOptions marker = new MarkerOptions();
+                                marker.position(new LatLng(d.getLat(), d.getLon()));
+                                marker.title(d.getName());
+                                marker.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
 
-                        googleMapMarkers.add(marker);
-                        googleMap.addMarker(marker);
+                                googleMapMarkers.add(marker);
+                                googleMap.addMarker(marker);
+                            }
+
+                            @Override
+                            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                            }
+
+                            @Override
+                            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                            }
+                        });
+
+                        Picasso.get().load(d.getImageUrl()).into(markerTargets.get(i));
                     }
+
                 });
                 break;
         }
