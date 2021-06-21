@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.shinydisco.R;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,16 +28,24 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.CancellationTokenSource;
 
 public class HomeFragment extends Fragment {
 
     MapView mMapViewFriends;
     private GoogleMap googleMapFriends;
+    private CancellationTokenSource cancellationTokenSource;
 
     private ImageView exploreDiscosImageView;
 
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        cancellationTokenSource.cancel();
     }
 
     @Override
@@ -54,6 +63,8 @@ public class HomeFragment extends Fragment {
         mMapViewFriends = rootView.findViewById(R.id.mapViewFriends);
         mMapViewFriends.onCreate(savedInstanceState);
         mMapViewFriends.onResume(); // needed to get the map to display immediately
+
+        cancellationTokenSource = new CancellationTokenSource();
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -129,7 +140,7 @@ public class HomeFragment extends Fragment {
 
     public void zoomToLastKnownLocation(GoogleMap map) {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            LocationServices.getFusedLocationProviderClient(getActivity()).getLastLocation()
+            LocationServices.getFusedLocationProviderClient(getActivity()).getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.getToken())
                 .addOnSuccessListener(location -> {
                     if (location != null) {
                         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
