@@ -38,6 +38,7 @@ import java.net.URL;
 
 import data.User;
 import ui.MainActivity.MainActivity;
+import ui.SettingsScreen.SettingsFragment;
 import ui.ViewProfileScreen.ViewProfileFragment;
 import utils.Firebase;
 
@@ -137,6 +138,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawer(Gravity.LEFT, true);
                 fragmentManager.beginTransaction()
                         .replace(R.id.home_fragment_container, ViewProfileFragment.class, bundle)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.settings_menu_item:
+                drawerLayout.closeDrawer(Gravity.LEFT, true);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.home_fragment_container, SettingsFragment.class, null)
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
                         .commit();

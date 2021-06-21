@@ -46,6 +46,8 @@
     <string name="email_colon">Email:</string>
     <string name="rank_colon">Rank:</string>
     <string name="rank_points_colon">Rank points:</string>
+    <string name="settings">Settings</string>
+    <string name="toggle_discos_notifications">Toggle disco notifications</string>
 
 
 </resources>
