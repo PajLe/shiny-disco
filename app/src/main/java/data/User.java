@@ -11,6 +11,8 @@ public class User {
     private String imageUrl;
     private String rank;
     private int rankPoints; // 0-2 newbie; 3-5 party guy; 6+ party monster
+    private double lat;
+    private double lon;
 
     public User() {
         updateRankBasedOnCurrentPoints();
@@ -92,5 +94,21 @@ public class User {
             rank = "Party guy";
         else
             rank = "Party monster";
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 }
