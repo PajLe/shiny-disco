@@ -23,29 +23,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/toggle_notifications_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="80dp"
-            android:text="@string/toggle_discos_notifications"
-            android:textColor="@color/shiny_disco_purple"
-            android:textSize="24sp"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="ui.SettingsScreen.SettingsLayoutFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_header_textview" />
-
-        <ToggleButton
-            android:id="@+id/toggle_notifications_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="72dp"
-            android:textColor="@color/buttoncolor"
-            app:layout_constraintStart_toEndOf="@+id/toggle_notifications_textview"
-            app:layout_constraintTop_toBottomOf="@+id/settings_header_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_header_textview"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

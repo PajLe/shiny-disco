@@ -13,7 +13,6 @@ import com.example.shinydisco.R;
 
 public class SettingsFragment extends Fragment {
 
-    private ToggleButton notificationsButton;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -31,7 +30,6 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        notificationsButton = rootView.findViewById(R.id.toggle_notifications_button);
 
         return rootView;
     }

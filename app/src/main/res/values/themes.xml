@@ -18,6 +18,7 @@
 
         <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerItem.DropDownItem</item>
+        <item name="preferenceTheme">@style/SettingsItemTheme</item>
     </style>
 
     <style name="SpinnerItem" parent="@android:style/Widget.TextView.SpinnerItem">
@@ -35,6 +36,12 @@
         <item name="android:textColor">@color/shiny_disco_light_cyan</item>
         <item name="android:textSize">20sp</item>
         <item name="android:background">@drawable/spinner_background</item>
+    </style>
+
+    <style name="SettingsItemTheme" parent="@style/PreferenceThemeOverlay">
+        <item name="android:textColorPrimary">@color/shiny_disco_cyan</item>
+        <item name="android:textColor">@color/shiny_disco_cyan</item>
+        <item name="android:textColorSecondary">@color/shiny_disco_light_cyan</item>
     </style>
 
 </resources>

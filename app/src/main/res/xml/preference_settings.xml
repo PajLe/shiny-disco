@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
+    android:theme="@style/Theme.ShinyDisco">
+
+    <SwitchPreferenceCompat
+        android:theme="@style/SettingsItemTheme"
+        app:key="notifications"
+        app:summary="Get a notification when a disco is nearby your current location"
+        app:title="Enable nearby disco notifications" />
+
+</PreferenceScreen>
