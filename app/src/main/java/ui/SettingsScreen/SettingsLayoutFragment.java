@@ -56,7 +56,7 @@ public class SettingsLayoutFragment extends PreferenceFragmentCompat {
             }
         }
 
-        return false;
+        return true;
     };
 
 }
