@@ -29,7 +29,8 @@ public class BackgroundLocationService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public void onCreate() {
+        super.onCreate();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         createLocationRequest();
         locationCallback = new LocationCallback() {
@@ -47,8 +48,11 @@ public class BackgroundLocationService extends Service {
                 }
             }
         };
-        startLocationUpdates();
+    }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        startLocationUpdates();
         return super.onStartCommand(intent, flags, startId);
     }
 
