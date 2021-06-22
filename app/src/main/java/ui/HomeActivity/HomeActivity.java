@@ -66,6 +66,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         initializeUserInNavBar();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        boolean locServiceStart = sharedPreferences.getBoolean("notifications", false);
+        if (locServiceStart) {
+            Intent serv = new Intent(this, BackgroundLocationService.class);
+            startService(serv);
+        }
     }
 
     @Override
@@ -104,14 +111,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .setReorderingAllowed(true)
                 .addToBackStack(null)
                 .commit();
-
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        boolean locServiceStart = sharedPreferences.getBoolean("notifications", false);
-        if (locServiceStart) {
-            Intent serv = new Intent(this, BackgroundLocationService.class);
-            startService(serv);
-        }
     }
 
     private void initializeUserInNavBar() {
