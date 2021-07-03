@@ -16,20 +16,33 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import data.Disco;
+import data.User;
 import utils.Firebase;
 
 public class FullScreenMapViewModel extends ViewModel {
     MutableLiveData<List<Disco>> discosLiveData = new MutableLiveData<>();
-//    MutableLiveData<List<Friend>> friendLiveData = new MutableLiveData<>();
+    MutableLiveData<List<User>> friendLiveData = new MutableLiveData<>();
 
     private DatabaseReference discoDbRef;
 
     public FullScreenMapViewModel() {
         discoDbRef = Firebase.getDbRef();
-//        getFriends();
+    }
+
+    public LiveData<List<User>> getFriends(Collection<String> friendsIds) {
+
+        if (friendLiveData.getValue() == null) {
+            friendLiveData.setValue(new ArrayList<User>());
+            for (String friendId : friendsIds) {
+                discoDbRef.child(Firebase.DB_USERS).child(friendId).addValueEventListener(friendEventListener);
+            }
+        }
+
+        return friendLiveData;
     }
 
     public LiveData<List<Disco>> getDiscos() {
@@ -39,6 +52,31 @@ public class FullScreenMapViewModel extends ViewModel {
 
         return discosLiveData;
     }
+
+    ValueEventListener friendEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+            User friend = snapshot.getValue(User.class);
+            List<User> users = friendLiveData.getValue();
+
+            int i = 0;
+            for (; i < users.size(); i++) {
+                if (users.get(i).getUid().equals(friend.getUid())) {
+                    users.set(i, friend);
+                    break;
+                }
+            }
+            if (i == users.size())
+                users.add(friend);
+
+            friendLiveData.postValue(users);
+        }
+
+        @Override
+        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+        }
+    };
 
     ValueEventListener discosEventListener = new ValueEventListener() {
         @Override

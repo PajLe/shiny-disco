@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -42,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.Disco;
+import data.User;
 import ui.AddDiscoScreen.AddDiscoFragment;
 import ui.ViewDiscoScreen.ViewDiscoFragment;
 import utils.Firebase;
@@ -100,16 +102,56 @@ public class FullScreenMapFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(FullScreenMapViewModel.class);
         switch (mapViewId) {
-//            case R.id.mapViewFriends:
-//                viewModel.friendsLiveData.observe(this, discos -> {
-//                    //set on map or something
-//                });
-//                break;
+            case R.id.mapViewFriends:
+                FirebaseUser loggedInUser = Firebase.getFirebaseAuth().getCurrentUser();
+                if (loggedInUser != null) {
+                    Firebase.getDbRef().child(Firebase.DB_USERS).child(loggedInUser.getUid()).get().addOnSuccessListener(snapshot -> {
+                        User user = snapshot.getValue(User.class);
+                        if (user.getFriends() != null && user.getFriends().size() > 0) {
+                            viewModel.getFriends(user.getFriends().keySet()).observe(this, friends -> {
+                                googleMapMarkers = new ArrayList<>();
+                                markerTargets = new ArrayList<>();
+                                googleMap.clear();
+
+                                for (int i = 0; i < friends.size(); i++) {
+                                    User friend = friends.get(i);
+                                    markerTargets.add(new Target() {
+                                        @Override
+                                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                            MarkerOptions marker = new MarkerOptions();
+                                            marker.position(new LatLng(friend.getLat(), friend.getLon()));
+                                            marker.title(friend.getName());
+                                            marker.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                                            marker.snippet(friend.getUid());
+
+                                            googleMapMarkers.add(marker);
+                                            googleMap.addMarker(marker);
+                                            googleMap.setOnInfoWindowClickListener(friendClickListener);
+                                        }
+
+                                        @Override
+                                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                                        }
+
+                                        @Override
+                                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                                        }
+                                    });
+
+                                    Picasso.get().load(friend.getImageUrl()).into(markerTargets.get(i));
+                                }
+                            });
+                        }
+                    });
+                }
+                break;
             case R.id.explore_discos_image:
                 viewModel.getDiscos().observe(this, discos -> {
-                    googleMap.setOnInfoWindowClickListener(discoClickListener);
                     googleMapMarkers = new ArrayList<>();
                     markerTargets = new ArrayList<>();
+                    googleMap.clear();
 
                     for (int i = 0; i < discos.size(); i++) {
                         Disco d = discos.get(i);
@@ -124,6 +166,7 @@ public class FullScreenMapFragment extends Fragment {
 
                                 googleMapMarkers.add(marker);
                                 googleMap.addMarker(marker);
+                                googleMap.setOnInfoWindowClickListener(discoClickListener);
                             }
 
                             @Override
@@ -221,6 +264,17 @@ public class FullScreenMapFragment extends Fragment {
                 .setReorderingAllowed(true)
                 .addToBackStack(null)
                 .commit();
+    };
+
+    GoogleMap.OnInfoWindowClickListener friendClickListener = marker -> {
+//        String friendId = marker.getSnippet();
+//        Bundle bundle = new Bundle();
+//        bundle.putString(ViewDiscoFragment.ARG_DISCO_ID, discoId);
+//        getParentFragmentManager().beginTransaction()
+//                .add(R.id.home_fragment_container, ViewDiscoFragment.class, bundle)
+//                .setReorderingAllowed(true)
+//                .addToBackStack(null)
+//                .commit();
     };
 
 }
