@@ -42,6 +42,12 @@
         <item name="android:textColorPrimary">@color/shiny_disco_cyan</item>
         <item name="android:textColor">@color/shiny_disco_cyan</item>
         <item name="android:textColorSecondary">@color/shiny_disco_light_cyan</item>
+        <item name="colorSecondary">@color/shiny_disco_light_cyan</item>
+        <item name="colorAccent">@color/shiny_disco_light_cyan</item>
+        <item name="colorControlHighlight">@color/shiny_disco_light_cyan</item>
+        <item name="colorControlNormal">@color/shiny_disco_light_cyan</item>
+        <item name="colorControlActivated">@color/shiny_disco_light_cyan</item>
+        <item name="android:colorForeground">@color/shiny_disco_light_cyan</item>
     </style>
 
 </resources>
