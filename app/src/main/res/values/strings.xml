@@ -41,6 +41,8 @@
     <string name="ratings_colon">Ratings:</string>
     <string name="profile">Profile</string>
     <string name="view_profile">View profile</string>
+    <string name="find_friends">Connect with friends</string>
+    <string name="find_discos">Find Discos</string>
     <string name="user_id_colon">User id:</string>
     <string name="username_colon">Username:</string>
     <string name="email_colon">Email:</string>
@@ -50,6 +52,6 @@
     <string name="toggle_discos_notifications">Toggle disco notifications</string>
     <string name="disco_notification_channel_name">Disco notification channel</string>
     <string name="disco_notification_channel_description">Channel for notifications related to location</string>
-
+    <string name="search">Search</string>
 
 </resources>

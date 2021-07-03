@@ -86,4 +86,9 @@ public class Disco {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Disco Name:" + name + ", Average Rating: " + averageRating + ", Pricing: " + pricing + ", lat & lon: " + lat + "&" + lon;
+    }
 }

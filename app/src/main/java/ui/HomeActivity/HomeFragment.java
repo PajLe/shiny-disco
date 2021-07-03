@@ -84,7 +84,8 @@ public class HomeFragment extends Fragment {
             googleMapFriends = mMap;
             googleMapFriends.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.map_style_dark));
 
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             } else {
                 // For showing a move to my location button
@@ -141,12 +142,12 @@ public class HomeFragment extends Fragment {
     public void zoomToLastKnownLocation(GoogleMap map) {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             LocationServices.getFusedLocationProviderClient(getActivity()).getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.getToken())
-                .addOnSuccessListener(location -> {
-                    if (location != null) {
-                        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLatLng).zoom(12).build();
-                        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                    }
-                });
+                    .addOnSuccessListener(location -> {
+                        if (location != null) {
+                            LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLatLng).zoom(12).build();
+                            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        }
+                    });
     }
 }

@@ -7,23 +7,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreferenceCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,13 +30,11 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import data.User;
 import services.BackgroundLocationService;
+import ui.FindFriendsScreen.FindFriendsFragment;
 import ui.MainActivity.MainActivity;
+import ui.FindDiscos.FindDiscosFragment;
 import ui.SettingsScreen.SettingsFragment;
 import ui.ViewProfileScreen.ViewProfileFragment;
 import utils.Firebase;
@@ -135,10 +127,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.sign_out_menu_item:
                 firebaseAuth.signOut();
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(HomeActivity.this, "Successfully signed out", Toast.LENGTH_SHORT).show();
                 finish();
@@ -158,6 +151,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawer(Gravity.LEFT, true);
                 fragmentManager.beginTransaction()
                         .replace(R.id.home_fragment_container, SettingsFragment.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.find_friends_menu_item:
+                drawerLayout.closeDrawer(Gravity.LEFT, true);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.home_fragment_container, FindFriendsFragment.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.find_discos_menu_item:
+                drawerLayout.closeDrawer(Gravity.LEFT, true);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.home_fragment_container, FindDiscosFragment.class, null)
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
                         .commit();

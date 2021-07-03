@@ -19,6 +19,16 @@
     <item android:title="@string/profile"
         >
         <menu>
+            <item android:id="@+id/find_friends_menu_item"
+                android:title="@string/find_friends"
+                android:icon="@drawable/ic_baseline_people_24"
+                app:iconTint="@color/shiny_disco_light_cyan"
+                />
+            <item android:id="@+id/find_discos_menu_item"
+                android:title="@string/find_discos"
+                android:icon="@drawable/ic_baseline_search_24"
+                app:iconTint="@color/shiny_disco_light_cyan"
+                />
             <item android:id="@+id/view_profile_menu_item"
                 android:title="@string/view_profile"
                 android:icon="@drawable/profile_cyan_icon"

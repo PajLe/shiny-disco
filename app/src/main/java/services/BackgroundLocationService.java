@@ -1,7 +1,6 @@
 package services;
 
 import android.Manifest;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -68,17 +67,17 @@ public class BackgroundLocationService extends Service {
 
     private void getNearbyDiscos(Location lastLocation) {
         Firebase.getDbRef().child(Firebase.DB_DISCOS).get().addOnSuccessListener(snapshot -> {
-           for (DataSnapshot child : snapshot.getChildren()) {
-               Disco disco = child.getValue(Disco.class);
-               Location loc = new Location("");
+            for (DataSnapshot child : snapshot.getChildren()) {
+                Disco disco = child.getValue(Disco.class);
+                Location loc = new Location("");
 
-               loc.setLatitude(disco.getLat());
-               loc.setLongitude(disco.getLon());
-               if (lastLocation.distanceTo(loc) < 1000.0f) {
-                   createNotification();
-                   break;
-               }
-           }
+                loc.setLatitude(disco.getLat());
+                loc.setLongitude(disco.getLon());
+                if (lastLocation.distanceTo(loc) < 1000.0f) {
+                    createNotification();
+                    break;
+                }
+            }
         });
     }
 
@@ -153,7 +152,6 @@ public class BackgroundLocationService extends Service {
                 locationCallback,
                 Looper.getMainLooper());
     }
-
 
 
 }
