@@ -46,6 +46,7 @@ import data.Disco;
 import data.User;
 import ui.AddDiscoScreen.AddDiscoFragment;
 import ui.ViewDiscoScreen.ViewDiscoFragment;
+import ui.ViewFriendScreen.ViewFriendFragment;
 import utils.Firebase;
 
 public class FullScreenMapFragment extends Fragment {
@@ -267,14 +268,14 @@ public class FullScreenMapFragment extends Fragment {
     };
 
     GoogleMap.OnInfoWindowClickListener friendClickListener = marker -> {
-//        String friendId = marker.getSnippet();
-//        Bundle bundle = new Bundle();
-//        bundle.putString(ViewDiscoFragment.ARG_DISCO_ID, discoId);
-//        getParentFragmentManager().beginTransaction()
-//                .add(R.id.home_fragment_container, ViewDiscoFragment.class, bundle)
-//                .setReorderingAllowed(true)
-//                .addToBackStack(null)
-//                .commit();
+        String friendId = marker.getSnippet();
+        Bundle bundle = new Bundle();
+        bundle.putString(ViewFriendFragment.ARG_USER_ID, friendId);
+        getParentFragmentManager().beginTransaction()
+                .add(R.id.home_fragment_container, ViewFriendFragment.class, bundle)
+                .setReorderingAllowed(true)
+                .addToBackStack(null)
+                .commit();
     };
 
 }

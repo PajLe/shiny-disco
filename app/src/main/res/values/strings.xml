@@ -53,5 +53,7 @@
     <string name="disco_notification_channel_name">Disco notification channel</string>
     <string name="disco_notification_channel_description">Channel for notifications related to location</string>
     <string name="search">Search</string>
+    <string name="view_friend">View friend</string>
+    <string name="friend">Friend</string>
 
 </resources>

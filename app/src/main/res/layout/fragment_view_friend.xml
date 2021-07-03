@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.ViewProfileScreen.ViewProfileFragment">
+    tools:context="ui.ViewFriendScreen.ViewFriendFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_app_color"
-        tools:context="ui.ViewProfileScreen.ViewProfileFragment">
+        tools:context="ui.ViewFriendScreen.ViewFriendFragment">
 
         <TextView
-            android:id="@+id/profile_uid_textview"
+            android:id="@+id/friend_uid_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -22,10 +22,10 @@
             android:textColor="@color/shiny_disco_purple"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_imageview" />
+            app:layout_constraintTop_toBottomOf="@+id/friend_profile_imageview" />
 
         <TextView
-            android:id="@+id/profile_rank_points_value_textview"
+            android:id="@+id/friend_rank_points_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -34,11 +34,11 @@
             android:text="@string/unknown"
             android:textColor="@color/shiny_disco_light_cyan"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/profile_rank_points_textview"
-            app:layout_constraintTop_toBottomOf="@+id/profile_rank_value_textview" />
+            app:layout_constraintStart_toEndOf="@+id/friend_rank_points_textview"
+            app:layout_constraintTop_toBottomOf="@+id/friend_rank_value_textview" />
 
         <TextView
-            android:id="@+id/profile_rank_points_textview"
+            android:id="@+id/friend_rank_points_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -48,10 +48,10 @@
             android:textColor="@color/shiny_disco_purple"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_rank_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/friend_rank_textview" />
 
         <TextView
-            android:id="@+id/profile_email_textview"
+            android:id="@+id/friend_email_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -61,10 +61,10 @@
             android:textColor="@color/shiny_disco_purple"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_name_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/friend_name_textview" />
 
         <TextView
-            android:id="@+id/profile_username_textview"
+            android:id="@+id/friend_username_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -74,10 +74,10 @@
             android:textColor="@color/shiny_disco_purple"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_uid_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/friend_uid_textview" />
 
         <TextView
-            android:id="@+id/profile_rank_textview"
+            android:id="@+id/friend_rank_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -87,10 +87,10 @@
             android:textColor="@color/shiny_disco_purple"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_email_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/friend_email_textview" />
 
         <TextView
-            android:id="@+id/profile_rank_value_textview"
+            android:id="@+id/friend_rank_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
@@ -99,11 +99,11 @@
             android:text="@string/unknown"
             android:textColor="@color/shiny_disco_light_cyan"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/profile_rank_textview"
-            app:layout_constraintTop_toBottomOf="@+id/profile_email_value_textview" />
+            app:layout_constraintStart_toEndOf="@+id/friend_rank_textview"
+            app:layout_constraintTop_toBottomOf="@+id/friend_email_value_textview" />
 
         <TextView
-            android:id="@+id/profile_email_value_textview"
+            android:id="@+id/friend_email_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -112,11 +112,11 @@
             android:text="@string/unknown"
             android:textColor="@color/shiny_disco_light_cyan"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/profile_email_textview"
-            app:layout_constraintTop_toBottomOf="@+id/profile_name_value_textview" />
+            app:layout_constraintStart_toEndOf="@+id/friend_email_textview"
+            app:layout_constraintTop_toBottomOf="@+id/friend_name_value_textview" />
 
         <TextView
-            android:id="@+id/profile_name_textview"
+            android:id="@+id/friend_name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -126,10 +126,10 @@
             android:textColor="@color/shiny_disco_purple"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_username_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/friend_username_textview" />
 
         <TextView
-            android:id="@+id/profile_uid_value_textview"
+            android:id="@+id/friend_uid_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -138,11 +138,11 @@
             android:text="@string/unknown"
             android:textColor="@color/shiny_disco_light_cyan"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/profile_uid_textview"
-            app:layout_constraintTop_toBottomOf="@+id/profile_imageview" />
+            app:layout_constraintStart_toEndOf="@+id/friend_uid_textview"
+            app:layout_constraintTop_toBottomOf="@+id/friend_profile_imageview" />
 
         <TextView
-            android:id="@+id/profile_name_value_textview"
+            android:id="@+id/friend_name_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
@@ -151,11 +151,11 @@
             android:text="@string/unknown"
             android:textColor="@color/shiny_disco_light_cyan"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/profile_name_textview"
-            app:layout_constraintTop_toBottomOf="@+id/profile_username_value_textview" />
+            app:layout_constraintStart_toEndOf="@+id/friend_name_textview"
+            app:layout_constraintTop_toBottomOf="@+id/friend_username_value_textview" />
 
         <TextView
-            android:id="@+id/profile_username_value_textview"
+            android:id="@+id/friend_username_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -164,17 +164,17 @@
             android:text="@string/unknown"
             android:textColor="@color/shiny_disco_light_cyan"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/profile_username_textview"
-            app:layout_constraintTop_toBottomOf="@+id/profile_uid_value_textview" />
+            app:layout_constraintStart_toEndOf="@+id/friend_username_textview"
+            app:layout_constraintTop_toBottomOf="@+id/friend_uid_value_textview" />
 
         <TextView
-            android:id="@+id/view_profile_textview"
+            android:id="@+id/view_friend_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
             android:layout_marginTop="28dp"
-            android:text="@string/profile"
+            android:text="@string/view_friend"
             android:textColor="@color/shiny_disco_pink"
             android:textSize="48sp"
             android:textStyle="bold"
@@ -182,7 +182,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/profile_imageview"
+            android:id="@+id/friend_profile_imageview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
@@ -190,7 +190,7 @@
             android:layout_marginTop="40dp"
             android:contentDescription="@string/nav_profile_image_content_description"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_profile_textview"
+            app:layout_constraintTop_toBottomOf="@+id/view_friend_textview"
             tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
