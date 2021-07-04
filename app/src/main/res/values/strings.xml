@@ -57,7 +57,6 @@
     <string name="view_friend">View friend</string>
     <string name="friend">Friend</string>
     <string name="meters_from_me">Meters from me</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="friend_name">Friend name</string>
 
 </resources>
