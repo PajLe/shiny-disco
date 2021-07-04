@@ -76,13 +76,15 @@ public class FindDiscosFragment extends Fragment {
                     }
                     if (!(distanceFromMe.getText().toString() == null || distanceFromMe.getText().toString().length() == 0)) {
                         LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                        @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        @SuppressLint("MissingPermission") Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        double distance = Double.parseDouble(distanceFromMe.getText().toString());
 
-                        int distance = Integer.parseInt(distanceFromMe.getText().toString()) / 1000;
-                        double new_latitude = location.getLatitude() + (distance / 6378) * (180 / Math.PI);
-                        double new_longitude = location.getLongitude() + (distance / 6378) * (180 / Math.PI) / Math.cos(location.getLatitude() * Math.PI / 180);
-
-                        discos.removeIf(d -> d.getLat() > new_latitude && d.getLon() > new_longitude);
+                        discos.removeIf(d -> {
+                            Location discoLocation = new Location("");
+                            discoLocation.setLongitude(d.getLon());
+                            discoLocation.setLatitude(d.getLat());
+                            return myLocation.distanceTo(discoLocation) > distance;
+                        });
                     }
                     discos.removeIf(d -> !d.getPricing().equals(price.getSelectedItem().toString()));
                     discos.removeIf(d -> d.getAverageRating() < Double.parseDouble(discoRating.getSelectedItem().toString()));
