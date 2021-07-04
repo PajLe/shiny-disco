@@ -89,6 +89,6 @@ public class Disco {
 
     @Override
     public String toString() {
-        return "Disco Name:" + name + ", Average Rating: " + averageRating + ", Pricing: " + pricing + ", lat & lon: " + lat + "&" + lon;
+        return "Average Rating: " + averageRating + ", Pricing: " + pricing + ", lat & lon: " + lat + "&" + lon;
     }
 }
