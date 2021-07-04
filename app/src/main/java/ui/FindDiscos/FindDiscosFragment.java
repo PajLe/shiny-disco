@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 import data.Disco;
+import ui.ViewDiscoScreen.ViewDiscoFragment;
 import utils.Firebase;
 import utils.MultiSpinner;
 
@@ -103,7 +104,19 @@ public class FindDiscosFragment extends Fragment {
                     lv_disco_search_result.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Disco d = (Disco)parent.getItemAtPosition(position);
+                            Bundle discoBundle = new Bundle();
+                            discoBundle.putDouble(ViewDiscoOnMapFragment.ARG_LON, d.getLon());
+                            discoBundle.putDouble(ViewDiscoOnMapFragment.ARG_LAT, d.getLat());
+                            discoBundle.putString(ViewDiscoOnMapFragment.ARG_DISCO_ID, d.getId());
+                            discoBundle.putString(ViewDiscoOnMapFragment.ARG_DISCO_NAME, d.getName());
+                            discoBundle.putString(ViewDiscoOnMapFragment.ARG_DISCO_IMG, d.getImageUrl());
 
+                            getParentFragmentManager().beginTransaction()
+                                    .add(R.id.home_fragment_container, ViewDiscoOnMapFragment.class, discoBundle)
+                                    .setReorderingAllowed(true)
+                                    .addToBackStack(null)
+                                    .commit();
                         }
                     });
 
