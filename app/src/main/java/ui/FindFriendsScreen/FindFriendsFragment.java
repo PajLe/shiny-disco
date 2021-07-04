@@ -24,8 +24,12 @@ import com.example.shinydisco.R;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
+
+import data.User;
+import utils.Firebase;
 
 public class FindFriendsFragment extends Fragment {
     public static final int REQUEST_ENABLE_BT = 1;
@@ -40,7 +44,7 @@ public class FindFriendsFragment extends Fragment {
     public static final int CONNECTED = 3;
     public static final int NO_SOCKET_FOUND = 4;
 
-    String bluetooth_message = "payche";
+    String bluetooth_message = Firebase.getFirebaseAuth().getCurrentUser().getUid();
 
     public FindFriendsFragment() {
 
@@ -79,12 +83,32 @@ public class FindFriendsFragment extends Fragment {
                 case MESSAGE_READ:
 
                     byte[] readbuf = (byte[]) msg_type.obj;
-                    String string_recieved = new String(readbuf);
-                    //TODO with Paja when the message is read
+                    String string_received = new String(readbuf);
+                    String currentUserUid = Firebase.getFirebaseAuth().getCurrentUser().getUid();
+
+                    Firebase.getDbRef().child(Firebase.DB_USERS).child(currentUserUid).get().addOnSuccessListener(snapshot -> {
+                       User currentUser = snapshot.getValue(User.class);
+                       if (!currentUser.getFriends().containsKey(string_received)) {
+                           currentUser.getFriends().put(string_received, true);
+                           Firebase.getDbRef().child(Firebase.DB_USERS).child(currentUserUid).setValue(currentUser);
+                       }
+                    });
+
+                    Firebase.getDbRef().child(Firebase.DB_USERS).child(string_received).get().addOnSuccessListener(snapshot -> {
+                       User receivedUser = snapshot.getValue(User.class);
+                        if (!receivedUser.getFriends().containsKey(currentUserUid)) {
+                            receivedUser.getFriends().put(currentUserUid, true);
+                            Firebase.getDbRef().child(Firebase.DB_USERS).child(string_received).setValue(receivedUser);
+                        }
+
+                    });
+
+                    Toast.makeText(getActivity().getApplicationContext(), string_received, Toast.LENGTH_LONG).show();
 
                     break;
                 case MESSAGE_WRITE:
 
+                    Toast.makeText(getActivity().getApplicationContext(), "message write", Toast.LENGTH_SHORT).show();
                     if (msg_type.obj != null) {
                         ConnectedThread connectedThread = new ConnectedThread((BluetoothSocket) msg_type.obj);
                         connectedThread.write(bluetooth_message.getBytes());
@@ -125,7 +149,7 @@ public class FindFriendsFragment extends Fragment {
 
     public void initialize_layout(View rootView) {
         lv_paired_devices = (ListView) rootView.findViewById(R.id.lv_paired_devices);
-        adapter_paired_devices = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.support_simple_spinner_dropdown_item);
+        adapter_paired_devices = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.bluetooth_connection_layout);
         lv_paired_devices.setAdapter(adapter_paired_devices);
     }
 
@@ -142,7 +166,6 @@ public class FindFriendsFragment extends Fragment {
         } else {
             set_pairedDevices = bluetoothAdapter.getBondedDevices();
 
-            //TODO check with Paja
             if (set_pairedDevices.size() > 0) {
 
                 for (BluetoothDevice device : set_pairedDevices) {
