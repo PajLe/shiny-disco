@@ -56,5 +56,6 @@
     <string name="disco_name">Disco Name</string>
     <string name="view_friend">View friend</string>
     <string name="friend">Friend</string>
+    <string name="meters_from_me">Meters from me</string>
 
 </resources>
